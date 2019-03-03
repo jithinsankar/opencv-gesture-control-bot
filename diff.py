@@ -7,6 +7,9 @@ Created on Wed Feb 20 19:00:03 2019
 
 import cv2 as cv
 import numpy as np
+import serial
+#set com port accordingly
+arduino = serial.Serial('COM', 19200)
 
 video = cv.VideoCapture(0)
 frame2 = None
@@ -41,12 +44,16 @@ while True:
             continue
         if x2-x1 > 20:
             print("Right")
+			arduino.write('R')
         if x1-x2 > 20:
             print("Left")
+			arduino.write('L')
         if y2-y1 > 20:
             print("Forward")
+			arduino.write('F')
         if y1-y2 > 20:
-            print("Reverse")
+            print("Back")
+			arduino.write('B')
         #print(x1,y1)    
         x2 = x1 
         y2 = y1
